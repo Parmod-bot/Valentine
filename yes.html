@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mission Success ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #text {
+      font-size: 28px;
+      max-width: 90%;
+      line-height: 1.5;
+    }
+
+    .final {
+      font-size: 36px;
+      color: #ff4d6d;
+      animation: pop 0.6s ease forwards;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .small {
+      font-size: 18px;
+      margin-top: 15px;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="text">Loading happiness...</div>
+
+<script>
+const lines = [
+  "Loading happiness...",
+  "Preparing smiles...",
+  "Connecting two idiots...",
+  "Securing Valentine status...",
+  "Finalizing decision..."
+];
+
+let i = 0;
+
+function nextLine() {
+  if (i < lines.length) {
+    document.getElementById("text").innerText = lines[i];
+    i++;
+    setTimeout(nextLine, 1200);
+  } else {
+    showFinal();
+  }
+}
+
+function showFinal() {
+  document.body.style.background = "#111";
+  document.getElementById("text").innerHTML = `
+    <div class="final">MISSION SUCCESS ❤️</div>
+    <div class="small">Too late. You already said yes.</div>
+    <div class="small">No take-backs. Screenshot stored. 😌</div>
+  `;
+}
+
+setTimeout(nextLine, 1000);
+</script>
+
+</body>
+</html>
