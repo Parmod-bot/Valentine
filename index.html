@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Valentine Proposal ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: white;
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.15s;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background: #28c76f;
+      color: white;
+      left: 40%;
+      top: 60%;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      background: #ea5455;
+      color: white;
+      left: 55%;
+      top: 60%;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? ❤️</h1>
+
+<button id="yesBtn" class="btn" onclick="goYes()">YES</button>
+<button id="noBtn" class="btn">NO</button>
+
+<script>
+function goYes() {
+  window.location.href = "yes.html";
+}
+
+const noBtn = document.getElementById("noBtn");
+
+function moveNo() {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+</script>
+
+</body>
+</html>
