@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valentine 💘</title>
+
+<style>
+body {
+  height:100vh;
+  margin:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(135deg,#ff758c,#ff7eb3);
+  font-family: Arial, sans-serif;
+  overflow:hidden;
+}
+
+.box {
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  position:relative;
+  width:320px;
+}
+
+h2 { color:#ff4d6d; }
+
+button {
+  padding:12px 22px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  margin:10px;
+}
+
+#yesBtn {
+  background:#ff4d6d;
+  color:white;
+}
+
+#noBtn {
+  background:#ddd;
+  position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box">
+  <h2>Will you be my Valentine? ❤️</h2>
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😢</button>
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, addDoc, collection, serverTimestamp }
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ✅ YOUR CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyDW7HktGGlyKMyTffLDIHOB7iBOH27bFZM",
+  authDomain: "anything-a4f15.firebaseapp.com",
+  projectId: "anything-a4f15",
+  storageBucket: "anything-a4f15.firebasestorage.app",
+  messagingSenderId: "574497412187",
+  appId: "1:574497412187:web:9cc1097c44801dafa71b7e",
+  measurementId: "G-2J9M9DC9S3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function logEvent(type) {
+  try {
+    await addDoc(collection(db, "events"), {
+      type: type,
+      time: serverTimestamp(),
+      ua: navigator.userAgent
+    });
+  } catch(e) {
+    console.log("log failed");
+  }
+}
+
+/* log page open */
+logEvent("page_opened");
+
+/* moving NO button */
+const noBtn = document.getElementById("noBtn");
+const box = document.getElementById("box");
+
+function moveNo() {
+  const w = box.offsetWidth - 100;
+  const h = box.offsetHeight - 60;
+  noBtn.style.left = Math.random()*w + "px";
+  noBtn.style.top = Math.random()*h + "px";
+}
+
+noBtn.addEventListener("mouseenter", () => {
+  logEvent("no_hover");
+  moveNo();
+});
+
+noBtn.addEventListener("click", () => {
+  logEvent("no_click");
+  moveNo();
+});
+
+/* YES click */
+document.getElementById("yesBtn").onclick = async () => {
+  await logEvent("yes_click");
+
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      color:white;
+      font-family:Arial;
+      text-align:center;
+    ">
+      <h1>Yay 💞</h1>
+      <h2>You just made my day</h2>
+      <p>Official Valentine status: CONFIRMED</p>
+    </div>
+  `;
+};
+
+</script>
+
+</body>
+</html>
